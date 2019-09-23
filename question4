@@ -1,0 +1,57 @@
+<script>
+
+ isValidTime = (a, b, c, d) => {
+    let hours = a * 10 + b;
+    let minutes = c * 10 + d;
+    if (hours >= 0 && hours < 24) {
+      if (minutes >= 0 && minutes < 60) {
+        return true;
+      }
+    }
+    return false;
+  };
+  
+  permute = permutation => {
+    var length = permutation.length,
+      result = [permutation.slice()],
+      c = new Array(length).fill(0),
+      i = 1,
+      k,
+      p;
+
+    while (i < length) {
+      if (c[i] < i) {
+        k = i % 2 && c[i];
+        p = permutation[i];
+        permutation[i] = permutation[k];
+        permutation[k] = p;
+        ++c[i];
+        i = 1;
+        result.push(permutation.slice());
+      } else {
+        c[i] = 0;
+        ++i;
+      }
+    }
+    return result;
+  };
+
+  solution_q4 = (a, b, c, d) => {
+    let x = permute([a, b, c, d]);
+    let arr = [1, 2, 3, 4];
+    let count = 0;
+    let dict = {};
+    for (i = 0; i < x.length; i++) {
+      if (!dict[x[i]]) {
+        dict[x[i]] = 1;
+        if (isValidTime(x[i][0], x[i][1], x[i][2], x[i][3])) {
+          count++;
+        }
+      }
+    }
+    return count;
+  };
+
+  console.log(solution_q4(1, 8, 3, 2));
+  
+</script>
