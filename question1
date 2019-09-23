@@ -1,0 +1,30 @@
+ <script>
+ 
+ isLovely = number => {
+    let a = number.toString(10);
+    var dict = {};
+    for (var i = 0; i < a.length; i++) {
+      if (dict[a[i]]) dict[a[i]] = dict[a[i]] + 1;
+      else dict[a[i]] = 1;
+    }
+    for (var key in dict) {
+      if (dict[key] > 2) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  solution_q1 = (a, b) => {
+    let count = 0;
+    for (i = a; i <= b; i++) {
+      if (isLovely(i)) {
+        count++;
+      }
+    }
+    return count;
+  };
+  
+  console.log(solution_q1(1, 111));
+
+</script>
